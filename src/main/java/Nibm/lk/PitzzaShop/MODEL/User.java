@@ -1,6 +1,19 @@
 package Nibm.lk.PitzzaShop.MODEL;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="user")
 public class User {
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+    private  String username;
+    private  String password;
+
 
     public Long getId() {
         return id;
@@ -26,15 +39,18 @@ public class User {
         this.password = password;
     }
 
-    private Long id;
-    private  String username;
-    private  String password;
 
     public User(String username, String password)
     {
         this.username=username;
         this.password=password;
 
+    }
+
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", username=" + username + "]";
     }
 
 }
