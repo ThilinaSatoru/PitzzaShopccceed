@@ -16,12 +16,12 @@ public class LoginController {
     @Autowired
     private UserService userservice;
     @GetMapping("/")
-    public String Showloginpage(){ return "Loggin";}
+    public String Showloginpage(){ return "login1";}
 
-    @PostMapping("/Loggin")
-    public String Loggin(@RequestParam long useId, @RequestParam String password, Model model ){
+    @PostMapping("/login")
+    public String Login(@RequestParam String username, @RequestParam String password, Model model ){
 
-        User user=userservice.findById(useId);
+        User user=userservice.findByUsername(username);
 
         if (user != null && user.getPassword().equals(password)) {
             System.out.println("login complete");
@@ -29,7 +29,7 @@ public class LoginController {
         }
         else {
             model.addAttribute("error", "Invalid username or password");
-            return  "Loggin";
+            return  "Login";
         }
 
 
