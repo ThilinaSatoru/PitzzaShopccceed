@@ -1,15 +1,15 @@
 package Nibm.lk.PitzzaShop.service;
 
-import Nibm.lk.PitzzaShop.MODEL.Products;
+import Nibm.lk.PitzzaShop.MODEL.Product;
 
 import java.util.List;
 
 public interface IProductservice {
-    List<Products> findAll();
+    List<Product> findAll();
 
-    Products save(Products product);
+    Product save(Product product);
 
-    Products find(Long id);
+    Product find(Long id);
 
     boolean delete(Long id);
 

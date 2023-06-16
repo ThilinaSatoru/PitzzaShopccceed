@@ -1,6 +1,6 @@
 package Nibm.lk.PitzzaShop.controller;
 
-import Nibm.lk.PitzzaShop.MODEL.Products;
+import Nibm.lk.PitzzaShop.MODEL.Product;
 import Nibm.lk.PitzzaShop.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -17,7 +17,7 @@ public class ProductController {
 
     @GetMapping("/product")
     public String showProductPage(Model model) {
-        List<Products> listProduct = productService.listAll();
+        List<Product> listProduct = productService.listAll();
         model.addAttribute("listProduct",listProduct);
         System.out.println("Get / ");
         return "product";
@@ -26,12 +26,12 @@ public class ProductController {
     @GetMapping("/new_product")
     public String add(Model model)
     {
-        model.addAttribute("product", new Products());
+        model.addAttribute("product", new Product());
         return "new_product";
     }
 
     @RequestMapping(value = "/saves", method = RequestMethod.POST)
-    public String saveProduct(@ModelAttribute("product") Products std){
+    public String saveProduct(@ModelAttribute("product") Product std) {
         productService.saveProducts(std);
         return "redirect:product";
     }
@@ -39,7 +39,7 @@ public class ProductController {
     @RequestMapping("/edits/{id}")
     public ModelAndView showEditPage(@PathVariable(name = "id") Long id){
         ModelAndView mav = new ModelAndView("new_product");
-        Products std = productService.get(id);
+        Product std = productService.get(id);
         mav.addObject("product",std);
         return mav;
     }

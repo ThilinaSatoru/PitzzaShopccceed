@@ -2,7 +2,7 @@ package Nibm.lk.PitzzaShop.controller;
 
 
 import Nibm.lk.PitzzaShop.MODEL.User;
-import Nibm.lk.PitzzaShop.service.UserService;
+import Nibm.lk.PitzzaShop.service.IUserservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,14 +14,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
 
     @Autowired
-    private UserService userservice;
+    private final IUserservice userService;
+
+    public LoginController(IUserservice userService) {
+        this.userService = userService;
+    }
+
     @GetMapping("/")
-    public String Showloginpage(){ return "login1";}
+    public String ShowLoginPage() {
+        return "login";
+    }
 
     @PostMapping("/login")
-    public String Login(@RequestParam String username, @RequestParam String password, Model model ){
+    public String Login(@RequestParam String username, @RequestParam String password, Model model) {
 
-        User user=userservice.findByUsername(username);
+        User user = userService.findByUsername(username);
 
         if (user != null && user.getPassword().equals(password)) {
             System.out.println("login complete");
@@ -29,7 +36,7 @@ public class LoginController {
         }
         else {
             model.addAttribute("error", "Invalid username or password");
-            return  "Login";
+            return "login";
         }
 
 
